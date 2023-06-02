@@ -1,37 +1,28 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Erro404 from './pages/Erro404'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Perfil from './pages/Perfil'
+import UserContext from './contexts/UserContext'
+import './App.css'
 
 export default function App() {
-  const [logado, setLogado] = useState(false);
-  const [userID, setUserID] = useState();
-
-  function handleLogin(event) {
-    setLogado(true);
-    setUserID(100);
-  }
-
-  function handleLogout(event) {
-    setLogado(false);
-    setUserID(null);
-  }
+  const { logado } = useContext(UserContext) 
 
   return (
     <BrowserRouter>
       <Routes>
         {logado ?
           <>
-            <Route path="/" element={<Layout id={userID} onLogout={handleLogout} />} >
-              <Route index element={<Home  />} />
+            <Route path="/" element={<Layout/>} >
+              <Route index element={<Home/>} />
               <Route path="perfil/:id" element={<Perfil />} />            
             </Route>
           </>
           :
-          <Route path="/login" element={<Login onLogin={handleLogin}/>} />
+          <Route path="/login" element={<Login/>} />
         }
         <Route path="*" element={<Erro404 />} />
       </Routes>

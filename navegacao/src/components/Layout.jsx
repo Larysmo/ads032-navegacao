@@ -5,7 +5,7 @@ import './Layout.css'
 export default function Layout(props) {
     return (
         <>
-            <Navbar id={props.id} onLogout={props.onLogout} />
+            <Navbar />
             <Outlet />
         </>
     )

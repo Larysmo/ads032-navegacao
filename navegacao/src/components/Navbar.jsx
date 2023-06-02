@@ -1,12 +1,15 @@
 import { NavLink, useNavigate } from "react-router-dom"
+import { useContext } from 'react'
+import UserContext from "../contexts/UserContext"
 import './Navbar.css'
 
 export default function Navbar(props) {
+    const { userID, handleLogout } = useContext(UserContext)
     const navigate = useNavigate()
-    const perfil = `perfil/${props.id}`
+    const perfil = `perfil/${userID}`
 
     function handleClick(event) {
-        props.onLogout(event)
+        handleLogout()
         navigate('/login')
     }
 
