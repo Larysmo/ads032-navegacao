@@ -27,9 +27,10 @@ export default function LoginRHF(props) {
         }
     }
 
-    function onSubmit(data) {
-        handleLogin()
-        navigate("/")
+    async function onSubmit(data) {
+        const {email,senha} = data
+        const ok = await handleLogin(email, senha)
+            if (ok) navigate("/")
     }
 
     return (
